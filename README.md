@@ -13,3 +13,6 @@ Branch Step02-EmptySpringBootProducer
 In this step we will create a new Spring boot sample project for our producer.
 This can be done by downloading a template from https://start.spring.io/ 
 
+Branch Step03-AddingRequestMappings
+------------------------------------
+In this step we will add 2 request mappings to our producer:
