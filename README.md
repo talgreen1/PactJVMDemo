@@ -15,8 +15,9 @@ This can be done by downloading a template from https://start.spring.io/
 
 Branch Step03-AddingRequestMappings
 ------------------------------------
-In this step we will add 1 request mappings to our producer:
+In this step we will add 2 request mappings to our producer:
 
-**getAllUsers**: will return all the users. The path for this service is “/users”.
+* **getAllUsers**: will return all the users. The path for this service is “/users”.
 The producer will return a hard-coded list of users.
+* **getUser**: will return a specific user. The path for this service is “/user/{id}”
 
