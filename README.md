@@ -21,3 +21,10 @@ In this step we will add 2 request mappings to our producer:
 The producer will return a hard-coded list of users.
 * **getUser**: will return a specific user. The path for this service is “/user/{id}”
 
+Branch Step04–AddConsumerCodeAndTestWithoutPack
+---------------------------------------------
+
+Branch name: Step04–AddConsumerCodeAndTestWithoutPack
+
+In this step we will add the consumer code. It is a CMD app that displays users information.
+It contains some JUnit tests without pact.
