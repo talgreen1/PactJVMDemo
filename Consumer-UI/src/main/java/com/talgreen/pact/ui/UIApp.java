@@ -60,6 +60,7 @@ public class UIApp {
 
         User user = jsonPath.getObject(".", User.class);
         System.out.println(user);
+
     }
 
     private static void printAllUser() {
