@@ -22,12 +22,16 @@ public class UserManagementMappings {
     }
 
     @RequestMapping("/user/{id}")
-    public ResponseEntity<User> getUsers(@PathVariable String id){
+    public ResponseEntity<User> getUser(@PathVariable String id){
         for (User user : users) {
             if (user.getId().equals(id)){
                 return ResponseEntity.ok().body(user);
             }
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+    @RequestMapping("/users")
+    public List<User> getUsers(){
+        return users;
     }
 }
