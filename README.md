@@ -28,3 +28,11 @@ Branch name: Step04–AddConsumerCode
 
 In this step we will add the consumer code. It is a CMD app that displays users information.
 
+In order to run the services do the following: 
+
+*Run the Producer* – run the main method in the class “UserManagementApplication”. This will run the service under localhost:8080.
+
+Now, that the producer is up and running, you can start the UI (the consumer) by running the **UIApp** class.
+It will show you textual menu in which you can select to show all users or only specific user.
+
+
