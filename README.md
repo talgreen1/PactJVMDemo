@@ -36,3 +36,10 @@ Now, that the producer is up and running, you can start the UI (the consumer) by
 It will show you textual menu in which you can select to show all users or only specific user.
 
 
+Branch Step05-AddUITestsWithMock
+---------------------------------------------
+
+In this step we will add some component tests to the UI with regular Mock.
+Testing the UI with regular mock is not good enough: 
+* By using regular mock server, we assume we know what the producer sends us and we mock it.
+* If the producer changes the API, we will not know it until we deploy both the consumer & producer code and test them together.
