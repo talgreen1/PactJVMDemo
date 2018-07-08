@@ -14,7 +14,6 @@ public class UIApp {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-//        printMenu();
         while (true) {
             printMenu();
             String line = in.nextLine();
