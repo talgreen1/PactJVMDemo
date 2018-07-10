@@ -49,7 +49,7 @@ public class UIApp {
         }
     }
 
-    private static void printUser(String userId) {
+    public static void printUser(String userId) {
         Response response = get("http://localhost:" + PORT + "/user/" + userId);
         if (response.getStatusCode() != 200) {
             System.out.println("Invalid user id");
