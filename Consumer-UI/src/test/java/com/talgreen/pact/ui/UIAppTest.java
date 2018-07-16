@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UIAppTest {
 
-    private static final int MOCK_PORT = 7979;
+    private static final int MOCK_PORT = 8080;
 
     private static WireMockServer wireMockServer;
 
@@ -30,14 +30,14 @@ public class UIAppTest {
 
         WireMock.configureFor("localhost", wireMockServer.port());
 
-        String responseForSpecificUser = "{\"id\":\"1\",\"username\":\"talgreen\",\"role\":\"admin\"}";
+        String responseForSpecificUser = "{\"id\":\"1\",\"username\":\"spiderman\",\"role\":\"admin\"}";
         stubFor(get(urlEqualTo("/user/1"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody(responseForSpecificUser)));
 
         String responseForAllUsers = "[" +
-                "{\"id\":\"1\",\"username\":\"talgreen\",\"role\":\"admin\"}," +
+                "{\"id\":\"1\",\"username\":\"superman\",\"role\":\"admin\"}," +
                 "{\"id\":\"2\",\"username\":\"ClarkKent\",\"role\":\"user\"}]";
 
         stubFor(get(urlEqualTo("/users"))
@@ -48,28 +48,18 @@ public class UIAppTest {
     }
 
     @Test
-    public void allUsersAPITest() {
-
-        Response response = RestAssured.get("http://localhost:" + MOCK_PORT + "/users");
-        JsonPath jsonPath = response.jsonPath();
-
-        List<User> userList = jsonPath.getList(".", User.class);
-        assertThat(userList.size()).isGreaterThanOrEqualTo(2);
-
+    public void getNumOfUserTest(){
+        int numOfUser = UIApp.getNumOfUser();
+        assertThat(numOfUser).isEqualTo(2);
     }
 
     @Test
-    public void singleUserAPITest() {
-
-        Response response = RestAssured.get("http://localhost:" + MOCK_PORT + "/user/1");
-        JsonPath jsonPath = response.jsonPath();
-
-        User user = jsonPath.getObject(".", User.class);
-
-        assertThat(user.getId()).isEqualTo("1");
-
-
+    public void getUsernamesTest(){
+        List<String> usernames = UIApp.getUsernames();
+        assertThat(usernames).containsExactly("superman", "ClarkKent");
     }
+
+
 
     @AfterClass
     public static void stopMock() {
