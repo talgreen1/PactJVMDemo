@@ -33,6 +33,7 @@ In order to run the services do the following:
 *Run the Producer* – run the main method in the class “UserManagementApplication”. This will run the service under localhost:8080.
 
 Now, that the producer is up and running, you can start the UI (the consumer) by running the **UIApp** class.
-It will show you textual menu in which you can select to show all users or only specific user.
+It will show you textual menu in which you can select some operations. All the operations generate REST calls to the producer, get the response and analyze it.
+In order to parse the response, the consumer uses the **'User'** class in order to de-serilize the response from the producer.
 
 

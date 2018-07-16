@@ -29,7 +29,7 @@ public class UIApp {
         menuText.append("NumOfUsers:\t\t\tGet the number of users\n");
         menuText.append("AllUsers:\t\t\tList all users\n");
         menuText.append("User <User ID>:\t\tShow specific user. For example: User 2\n");
-        menuText.append("Usernames:\t\tList all usernames\n");
+        menuText.append("Usernames:\t\t\tList all usernames\n");
         menuText.append("Exit:\t\t\t\tExit menu\n");
         menuText.append("\n\nPlease type a command:");
         System.out.println(menuText.toString());
