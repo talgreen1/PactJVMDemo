@@ -1,14 +1,16 @@
 package com.talgreen.pact.UserManagement;
 
+import java.util.List;
+
 public class User {
     private String id;
     private String username;
-    private String role;
+    private List<String> roles;
 
-    public User(String id, String username, String role) {
+    public User(String id, String username, List<String> roles) {
         this.id = id;
         this.username = username;
-        this.role = role;
+        this.roles = roles;
     }
 
     public String getId() {
@@ -19,8 +21,8 @@ public class User {
         return username;
     }
 
-    public String getRole() {
-        return role;
+    public List<String> getRoles() {
+        return roles;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

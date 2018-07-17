@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -17,8 +18,8 @@ public class UserManagementMappings {
 
     public UserManagementMappings() {
         users = new ArrayList<>();
-        users.add(new User("1", "talgreen", "admin"));
-        users.add(new User("2","ClarkKent", "user"));
+        users.add(new User("1", "talgreen", Arrays.asList("admin")));
+        users.add(new User("2","ClarkKent", Arrays.asList("admin", "user")));
     }
 
     @RequestMapping("/user/{id}")
