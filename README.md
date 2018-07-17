@@ -51,3 +51,13 @@ The 2 tests that was added in this step are:
 * getUsernamesTest
 
 The tests executes 2 methods of the consumer and validates the results. The consumer will perform the REST API calls to the mock instead of real producer.
+
+Branch Step06-ChangeTheProducerApi
+--------------------------------------------
+In this step we are changing the API of the producer: We will return multiple roles per user instead of just one.
+
+If we run the UI app, all API requests will fail because the UI expect the class **'User'** to contain one role, not a list.
+
+BUT - We can see that when we run the consumer tests, they will all pass: the consumer doesn't know about that change.
+
+This is the reason why we need Pact.
