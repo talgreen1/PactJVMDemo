@@ -55,8 +55,14 @@ public class UIAppTest {
 
     @Test
     public void getUsernamesTest(){
-        List<String> usernames = UIApp.getUsernames();
+        List<String> usernames = UIApp.getUserNames();
         assertThat(usernames).containsExactly("superman", "ClarkKent");
+    }
+
+    @Test
+    public void getRoleTest(){
+        String role = UIApp.getRole("1");
+        assertThat(role).isEqualTo("admin");
     }
 
 

@@ -46,11 +46,12 @@ Testing the UI with regular mock is not good enough:
 * If the producer changes the API, we will not know it until we deploy both the consumer & producer code and test them together.
 
 We are using Wire Mock in order to mock our producer.
-The 2 tests that was added in this step are: 
+The 3 tests that was added in this step are: 
 * getNumOfUserTest
 * getUsernamesTest
+* getRoleTest
 
-The tests executes 2 methods of the consumer and validates the results. The consumer will perform the REST API calls to the mock instead of real producer.
+Each test executes a method of the consumer and validates the results. The consumer will perform the REST API calls to the mock instead of real producer.
 
 Branch Step06-ChangeTheProducerApi
 --------------------------------------------
