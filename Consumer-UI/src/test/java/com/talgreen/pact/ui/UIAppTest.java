@@ -31,13 +31,6 @@ public class UIAppTest {
         Map<String, String> headers = new HashMap();
         headers.put("Content-Type", "application/json");
 
-
-        DslPart etaResults = PactDslJsonArray.arrayMaxLike(2,2)
-                .stringType("id","1")
-                .stringType("username","ClarkKent")
-                .stringType("role","admin")
-                .asBody();
-
         DslPart body = new PactDslJsonArray()
                 .object()
                     .stringType("id","1")
@@ -62,30 +55,6 @@ public class UIAppTest {
                 .body(body).toPact();
 
     }
-//    @BeforeClass
-//    public static void initMock() {
-//
-//        wireMockServer = new WireMockServer(wireMockConfig().port(MOCK_PORT));
-//        wireMockServer.start();
-//
-//        WireMock.configureFor("localhost", wireMockServer.port());
-//
-//        String responseForSpecificUser = "{\"id\":\"1\",\"username\":\"spiderman\",\"role\":\"admin\"}";
-//        stubFor(get(urlEqualTo("/user/1"))
-//                .willReturn(aResponse()
-//                        .withStatus(200)
-//                        .withBody(responseForSpecificUser)));
-//
-//        String responseForAllUsers = "[" +
-//                "{\"id\":\"1\",\"username\":\"superman\",\"role\":\"admin\"}," +
-//                "{\"id\":\"2\",\"username\":\"ClarkKent\",\"role\":\"user\"}]";
-//
-//        stubFor(get(urlEqualTo("/users"))
-//                .willReturn(aResponse()
-//                        .withStatus(200)
-//                        .withBody(responseForAllUsers)));
-//
-//    }
 
     @Test
     @PactVerification()
@@ -100,13 +69,4 @@ public class UIAppTest {
         List<String> usernames = UIApp.getUsernames();
         assertThat(usernames).containsExactly("ClarkKent", "Superman");
     }
-
-
-
-//    @AfterClass
-//    public static void stopMock() {
-//        wireMockServer.stop();
-//    }
-
-
 }
