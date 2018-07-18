@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.get;
 
 public class UIApp {
-    public static final int PORT = 8080;
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -23,16 +23,14 @@ public class UIApp {
     }
 
     private static void printMenu() {
-        StringBuffer menuText = new StringBuffer();
-        menuText.append("UI Menu\n");
-        menuText.append("-------\n");
-        menuText.append("NumOfUsers:\t\t\tGet the number of users\n");
-        menuText.append("AllUsers:\t\t\tList all users\n");
-        menuText.append("User <User ID>:\t\tShow specific user. For example: User 2\n");
-        menuText.append("Usernames:\t\t\tList all usernames\n");
-        menuText.append("Exit:\t\t\t\tExit menu\n");
-        menuText.append("\n\nPlease type a command:");
-        System.out.println(menuText.toString());
+        String menuText = "UI Menu\n" +
+                "-------\n" +
+                "NumOfUsers:\t\t\tGet the number of users\n" +
+                "Usernames:\t\t\tList all usernames\n" +
+                "Role <User ID>:\t\tGet role of specific user. For example: Role 2\n" +
+                "Exit:\t\t\t\tExit menu\n" +
+                "\n\nPlease type a command:";
+        System.out.println(menuText);
 
     }
 
@@ -42,14 +40,11 @@ public class UIApp {
             case ("numofusers"):
                 System.out.println(getNumOfUser());
                 break;
-            case ("allusers"):
-                printAllUser();
-                break;
-            case ("user"):
-                printUser(lineParts[1]);
-                break;
             case ("usernames"):
                 System.out.println(getUserNames());
+                break;
+            case ("role"):
+                System.out.println(getRole(lineParts[1]));
                 break;
             case ("exit"):
                 System.exit(0);
@@ -58,10 +53,20 @@ public class UIApp {
         }
     }
 
+    private static String getRole(String userId) {
+        Response response = get("http://localhost:" + PORT + "/user/" + userId);
+        if (response.getStatusCode() != 200) {
+            return ("Invalid user id");
+        }
+        JsonPath jsonPath = response.jsonPath();
+
+        User user = jsonPath.getObject(".", User.class);
+        return user.getRole();
+    }
+
     private static List<String> getUserNames() {
         List<User> users = getAllUsers();
-        List<String> usernames = users.stream().map(user -> user.getUsername()).collect(Collectors.toList());
-        return usernames;
+        return users.stream().map(User::getUsername).collect(Collectors.toList());
     }
 
     private static int getNumOfUser() {
@@ -73,30 +78,8 @@ public class UIApp {
         Response response = get("http://localhost:" + PORT + "/users");
         JsonPath jsonPath = response.jsonPath();
 
-        List<User> users = jsonPath.getList(".", User.class);
-
-        return users;
+        return jsonPath.getList(".", User.class);
     }
 
-    private static void printUser(String userId) {
-        Response response = get("http://localhost:" + PORT + "/user/" + userId);
-        if (response.getStatusCode() != 200) {
-            System.out.println("Invalid user id");
-            return;
-        }
-        JsonPath jsonPath = response.jsonPath();
 
-        User user = jsonPath.getObject(".", User.class);
-        System.out.println(user);
-
-    }
-
-    private static void printAllUser() {
-        Response response = get("http://localhost:" + PORT + "/users");
-        JsonPath jsonPath = response.jsonPath();
-
-        List<User> users = jsonPath.getList(".", User.class);
-
-        users.forEach(System.out::println);
-    }
 }
