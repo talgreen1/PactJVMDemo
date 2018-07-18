@@ -61,3 +61,7 @@ If we run the UI app, all API requests will fail because the UI expect the class
 BUT - We can see that when we run the consumer tests, they will all pass: the consumer doesn't know about that change.
 
 This is the reason why we need Pact.
+
+Branch Step07-AddingPactToConsumer
+-----------------------------------
+In this step we will remove the Wire Mock and add Pact to the consumer code.
