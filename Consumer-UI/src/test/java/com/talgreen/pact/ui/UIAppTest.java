@@ -1,12 +1,7 @@
 package com.talgreen.pact.ui;
 
-import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactProviderRuleMk2;
-import au.com.dius.pact.consumer.PactVerification;
-import au.com.dius.pact.consumer.dsl.DslPart;
-import au.com.dius.pact.consumer.dsl.PactDslJsonArray;
-import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
-import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.consumer.*;
+import au.com.dius.pact.consumer.dsl.*;
 import au.com.dius.pact.model.RequestResponsePact;
 import jdk.nashorn.internal.runtime.regexp.joni.constants.StringType;
 import org.junit.Rule;
@@ -24,22 +19,26 @@ public class UIAppTest {
     private static final int MOCK_PORT = 8080;
 
     @Rule
-    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("UserManagement", "localhost", 8080, this);
+    public PactProviderRuleMk2 provider = new PactProviderRuleMk2("UserManagement", "localhost", MOCK_PORT, this);
+
+    @DefaultResponseValues
+    public void defaultResponseValues(PactDslResponse response) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
+        response.headers(headers);
+    }
 
     @Pact(consumer = "UI")
-    public RequestResponsePact createPact(PactDslWithProvider builder) {
-        Map<String, String> headers = new HashMap();
-        headers.put("Content-Type", "application/json");
-
+    public RequestResponsePact createPactForAllUsers(PactDslWithProvider builder) {
         DslPart body = new PactDslJsonArray()
                 .object()
                     .stringType("id","1")
-                    .stringType("username","ClarkKent")
+                    .stringType("username","superman")
                     .stringType("role","admin")
                 .closeObject()
                 .object()
                     .stringType("id","2")
-                    .stringType("username","Superman")
+                    .stringType("username","ClarkKent")
                     .stringType("role","user")
                 .closeObject();
 
@@ -51,27 +50,44 @@ public class UIAppTest {
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .headers(headers)
                 .body(body).toPact();
+    }
 
+    @Pact(consumer = "UI")
+    public RequestResponsePact createPactForSingleUser(PactDslWithProvider builder) {
+        DslPart body = new PactDslJsonBody()
+                    .stringType("id","1")
+                    .stringType("username","superman")
+                    .stringType("role","admin")
+                    .asBody();
+
+
+        return builder
+                .given("There is at least one users in the system")
+                .uponReceiving("A request for user with id 1")
+                .path("/user/1")
+                .method("GET")
+                .willRespondWith()
+                .status(200)
+                .body(body).toPact();
     }
 
     @Test
-    @PactVerification()
+    @PactVerification(value ="UserManagement", fragment = "createPactForAllUsers")
     public void getNumOfUserTest(){
         int numOfUser = UIApp.getNumOfUser();
         assertThat(numOfUser).isEqualTo(2);
     }
 
     @Test
-    @PactVerification()
+    @PactVerification(value ="UserManagement", fragment = "createPactForAllUsers")
     public void getUsernamesTest(){
         List<String> usernames = UIApp.getUserNames();
         assertThat(usernames).containsExactly("superman", "ClarkKent");
     }
 
     @Test
-    @PactVerification()
+    @PactVerification(value ="UserManagement", fragment = "createPactForSingleUser")
     public void getRoleTest(){
         String role = UIApp.getRole("1");
         assertThat(role).isEqualTo("admin");
