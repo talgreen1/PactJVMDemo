@@ -66,3 +66,46 @@ This is the reason why we need Pact.
 Branch Step07-AddingPactToConsumer
 -----------------------------------
 In this step we will remove the Wire Mock and add Pact to the consumer code.
+
+We've added 2 **'@Pact'** methods - one for each API.
+In each method we are describing the REST API: 
+ - What is the request 
+ - What is the response
+ 
+ 
+This will do 2 things:
+ - Create a mock at runtime for the UI tests
+ - Create a pack file that can be run against the producer. The pact file is saved locally under the **'pacts'** directory in the project root folder. It is possible to use pack broker and store all the pact files in it.
+ 
+ 
+ We've added the annotation **'@PactVerification'** to each **'@Test'** method.
+ This will create the relevant mock before each test.
+ 
+ 
+We are specifying the relevant pact method name in the **'fragment'** attribute of the **'@PactVerification'** annotation.
+ 
+ We need to perform 2 changes in the consumer pom file:
+
+ - Add pact dependency:
+ ```xml
+<dependency>
+    <groupId>au.com.dius</groupId>
+    <artifactId>pact-jvm-consumer-junit_2.12</artifactId>
+    <version>3.5.19</version>
+    <scope>test</scope>
+</dependency>
+```
+ - Add system variable in the maven surefire plugin to specify the pact file location:
+ ```xml
+ <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.0</version>
+    <configuration>
+        <systemPropertyVariables>
+            <pact.rootDir>${basedir}/../pacts</pact.rootDir>
+        </systemPropertyVariables>
+    </configuration>
+</plugin>
+ ```
+ 
