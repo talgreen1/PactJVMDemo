@@ -108,4 +108,42 @@ We are specifying the relevant pact method name in the **'fragment'** attribute 
     </configuration>
 </plugin>
  ```
+ Branch Step08-PactVerifyOnProvider
+ ----------------------------------
+ In this step we will use the pact file to verify the provider.
+ By doing so - we will be able to see that the verification is failed because the API is 
+ broken between the consumer & provider.
  
+ In order to verify the provider you need to do the following:
+  * Add a plugin in the provider POM file to configure the host & port & pact folder:
+  
+  ```xml
+  <plugin>
+  				<groupId>au.com.dius</groupId>
+  				<artifactId>pact-jvm-provider-maven_2.11</artifactId>
+  				<version>3.5.10</version>
+  				<configuration>
+  					<serviceProviders>
+  						<!-- You can define as many as you need, but each must have a unique name -->
+  						<serviceProvider>
+  							<name>UserManagement</name>
+  							<!-- All the provider properties are optional, and have sensible defaults (shown below) -->
+  							<protocol>http</protocol>
+  							<host>localhost</host>
+  							<port>8080</port>
+  							<path>/</path>
+  							<pactFileDirectory>${basedir}/../pacts</pactFileDirectory>
+  						</serviceProvider>
+  					</serviceProviders>
+  					<pactBrokerUrl/>
+  				</configuration>
+  			</plugin>
+  ```
+  * Start the provider service.
+  * Run the following command on the provider:
+  
+  *mvn pact:verify*
+  
+  What that command does is playing the pact file against the provider and validating the response.
+  In our case it will fail because the provider will return list of roles and the pact tries to 
+  verify it as a single String.
