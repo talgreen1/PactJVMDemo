@@ -153,3 +153,7 @@ We are specifying the relevant pact method name in the **'fragment'** attribute 
   
   In this step we will revert the provider code to use one value role and run the *mvn pact:verify* command again.
   This time - the verificatino will pass.
+  
+  Branch Step10-AddingPackBroker
+  ------------------------------
+  In this step we will add a pack broker to hold all our pact files.
