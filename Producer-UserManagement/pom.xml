@@ -43,6 +43,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>au.com.dius</groupId>
+				<artifactId>pact-jvm-provider-maven_2.11</artifactId>
+				<version>3.5.10</version>
+				<configuration>
+					<serviceProviders>
+						<!-- You can define as many as you need, but each must have a unique name -->
+						<serviceProvider>
+							<name>UserManagement</name>
+							<!-- All the provider properties are optional, and have sensible defaults (shown below) -->
+							<protocol>http</protocol>
+							<host>localhost</host>
+							<port>8080</port>
+							<path>/</path>
+							<pactFileDirectory>${basedir}/../pacts</pactFileDirectory>
+						</serviceProvider>
+					</serviceProviders>
+					<pactBrokerUrl/>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
