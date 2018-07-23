@@ -147,3 +147,9 @@ We are specifying the relevant pact method name in the **'fragment'** attribute 
   What that command does is playing the pact file against the provider and validating the response.
   In our case it will fail because the provider will return list of roles and the pact tries to 
   verify it as a single String.
+  
+  Branch Step09-PactVerifyOnProviderAfterFixingCode
+  -------------------------------------------------
+  
+  In this step we will revert the provider code to use one value role and run the *mvn pact:verify* command again.
+  This time - the verificatino will pass.

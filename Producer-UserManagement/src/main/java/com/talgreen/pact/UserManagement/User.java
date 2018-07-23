@@ -5,12 +5,12 @@ import java.util.List;
 public class User {
     private String id;
     private String username;
-    private List<String> roles;
+    private String role;
 
-    public User(String id, String username, List<String> roles) {
+    public User(String id, String username, String role) {
         this.id = id;
         this.username = username;
-        this.roles = roles;
+        this.role = role;
     }
 
     public String getId() {
@@ -21,8 +21,8 @@ public class User {
         return username;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", roles='" + roles + '\'' +
+                ", roles='" + role + '\'' +
                 '}';
     }
 }
