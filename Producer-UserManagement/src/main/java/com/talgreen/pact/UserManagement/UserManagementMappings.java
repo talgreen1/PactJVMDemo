@@ -18,8 +18,8 @@ public class UserManagementMappings {
 
     public UserManagementMappings() {
         users = new ArrayList<>();
-        users.add(new User("1", "talgreen", Arrays.asList("admin")));
-        users.add(new User("2","ClarkKent", Arrays.asList("admin", "user")));
+        users.add(new User("1", "talgreen", "admin"));
+        users.add(new User("2","ClarkKent", "user"));
     }
 
     @RequestMapping("/user/{id}")
