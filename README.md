@@ -152,4 +152,4 @@ We are specifying the relevant pact method name in the **'fragment'** attribute 
   -------------------------------------------------
   
   In this step we will revert the provider code to use one value role and run the *mvn pact:verify* command again.
-  This time - the verificatino will pass.
+  This time - the verification will pass.
