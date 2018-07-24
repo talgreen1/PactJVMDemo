@@ -157,3 +157,20 @@ We are specifying the relevant pact method name in the **'fragment'** attribute 
   Branch Step10-AddingPackBroker
   ------------------------------
   In this step we will add a pack broker to hold all our pact files.
+  
+  You can create a pact broker by using docker:
+  https://github.com/DiUS/pact_broker-docker
+  docker-compose.yml to use: https://github.com/DiUS/pact_broker-docker/blob/master/docker-compose.yml
+  
+  In order to publish pacts you need:
+   * Make sure that there are pact files in the local pacts directory. The pact files will be created 
+   there when you run the tests on the consumer.
+   * In the consumer POM file: add the *pactBrokerUrl* in the *configuration* section of the pact plugin
+   * Run the following command from the consumer: *mvn pact:publish*
+   
+  In order to verify the producer from the broker:
+  * In the producer POM file: Add the *serviceProvider* in the *serviceProvider* section of the pact plugin
+  * run the same verify command: *mvn pact:verify*  
+  
+  You can view all the pacts in the broker by opening it in a browser.
+  
