@@ -38,7 +38,7 @@
                 <version>3.5.10</version>
                 <configuration>
                     <pactDirectory>../pacts</pactDirectory> <!-- Defaults to ${project.build.directory}/pacts -->
-                    <pactBrokerUrl>http://localhost:8111</pactBrokerUrl>
+                    <pactBrokerUrl>http://135.76.2.19:80</pactBrokerUrl>
                     <projectVersion>${project.version}</projectVersion> <!-- Defaults to ${project.version} -->
                     <trimSnapshot>true</trimSnapshot> <!-- Defaults to false -->
                 </configuration>

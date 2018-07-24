@@ -53,12 +53,13 @@
 						<!-- You can define as many as you need, but each must have a unique name -->
 						<serviceProvider>
 							<name>UserManagement</name>
+							<pactBrokerUrl>http://135.76.2.19:80</pactBrokerUrl>
 							<!-- All the provider properties are optional, and have sensible defaults (shown below) -->
 							<protocol>http</protocol>
 							<host>localhost</host>
 							<port>8080</port>
 							<path>/</path>
-							<pactFileDirectory>${basedir}/../pacts</pactFileDirectory>
+							<!--<pactFileDirectory>${basedir}/../pacts</pactFileDirectory>-->
 						</serviceProvider>
 					</serviceProviders>
 					<pactBrokerUrl/>
